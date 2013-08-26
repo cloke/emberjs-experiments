@@ -6,6 +6,12 @@ Ember.TEMPLATES['components/cml-select'] = Em.Handlebars.compile '
 '
 
 CmlSelectComponent = Ember.Component.extend
+ classNames: ['control-group']
+
+  _label: ( ->
+    @get('label') || @get('valueBinding._from')?.split(".").slice(-1)[0].replace(/_/g, " ").replace(/(?:^|\s)\S/g, (a) -> a.toUpperCase())
+  ).property 'label'
+  
   OptionsView: Em.CollectionView.extend
     tagName: 'select'
     valueBinding: 'parentView.value'
